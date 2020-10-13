@@ -1,5 +1,8 @@
 package support.lfp.toolkit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <pre>
  * Tip:
@@ -153,5 +156,29 @@ public class StringUtils {
             }
         }
         return new String(chars);
+    }
+
+    /**
+     * 从String中查询某个字符的下标集
+     */
+    public static final List<Integer> findIndex(String str, String findstr) {
+        List<Integer> indexs = new ArrayList<>();
+        int fromIndex = -1;
+        while ((fromIndex = str.indexOf(findstr, fromIndex + 1)) != -1) {
+            indexs.add(fromIndex);
+        }
+        return indexs;
+    }
+
+    /**
+     * 从String中查询某个字符的下标集
+     */
+    public static final List<Integer> findIndex(String str, char findstr) {
+        List<Integer> indexs = new ArrayList<>();
+        int fromIndex = -1;
+        while ((fromIndex = str.indexOf(findstr, fromIndex)) != -1) {
+            indexs.add(fromIndex);
+        }
+        return indexs;
     }
 }

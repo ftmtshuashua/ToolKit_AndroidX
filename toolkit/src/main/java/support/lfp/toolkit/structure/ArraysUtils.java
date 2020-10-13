@@ -1,4 +1,4 @@
-package support.lfp.toolkit;
+package support.lfp.toolkit.structure;
 
 import android.text.TextUtils;
 

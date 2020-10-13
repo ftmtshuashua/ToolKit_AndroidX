@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import support.lfp.toolkit.ArraysUtils;
+import support.lfp.toolkit.structure.ArraysUtils;
 
 /**
  * <pre>

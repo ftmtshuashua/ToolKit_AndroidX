@@ -13,6 +13,7 @@
 allprojects {
     repositories {
         maven { url 'https://www.jitpack.io' }
+    ...
     }
 }
 ```
@@ -20,13 +21,30 @@ allprojects {
 ```
 dependencies {
     implementation 'com.github.ftmtshuashua:ToolKit_AndroidX:version'
+    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    ...
 }
 ```
-该项目在AndroidX基础上搭建,需要以下库
-```
-implementation 'androidx.appcompat:appcompat:version'
-```
 
+##Kotlin配置
+
+在项目的build.gradle中添加
+```
+buildscript {
+    ext.kotlin_version = '1.3.72'
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        ...
+    }
+}
+```
+在Model的build.gradle中添加
+```
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    ...
+}
+```
 
 
 #### 问题反馈

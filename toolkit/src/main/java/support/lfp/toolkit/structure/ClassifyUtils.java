@@ -20,7 +20,7 @@ import java.util.Iterator;
  * </pre>
  */
 public class ClassifyUtils<K, V> {
-    transient HashMap<K, ArrayList<V>> mObjectData;
+    HashMap<K, ArrayList<V>> mObjectData = new HashMap<>();
 
     /**
      * 提交需要归类的数据

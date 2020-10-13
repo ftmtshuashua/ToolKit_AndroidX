@@ -1,14 +1,15 @@
 package support.lfp.toolkit;
 
-import android.app.Activity;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
+
 import support.lfp.toolkit.action.Action2;
 
 
@@ -338,4 +339,62 @@ public class ViewUtils {
     }
 
 
+    /**
+     * 从整个View中查询某个View
+     */
+    public static <T extends View> T findByViewByIdFromAll(View view, int id) {
+        View rootView = getRootView(view);
+        return rootView.findViewById(id);
+    }
+
+    /**
+     * 从整个View中查询某个View
+     */
+    public static <T extends View> T findByViewByClass(View view, Class<? extends View> viewClass) {
+        if (view == null) return null;
+        if (view.getClass().equals(viewClass)) return (T) view;
+
+        if (view instanceof ViewGroup) {
+            int childCount = ((ViewGroup) view).getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View childAt = ((ViewGroup) view).getChildAt(i);
+                T byViewFromAll = findByViewByClass(childAt, viewClass);
+                if (byViewFromAll != null) return byViewFromAll;
+            }
+
+        }
+
+        return null;
+    }
+
+    /**
+     * 从整个根View中查询某个View
+     */
+    public static <T extends View> T findByViewByClassFromAll(View view, Class<? extends View> viewClass) {
+        return findByViewByClass(getRootView(view), viewClass);
+    }
+
+    /**
+     * 由下向上查询父类View
+     */
+    public static <T extends View> T findByViewByClassFromParent(View view, Class<? extends View> viewClass) {
+        if (view == null) return null;
+        ViewParent parent = view.getParent();
+        if (parent == null || !(view instanceof View)) return null;
+        if (parent.getClass().equals(viewClass)) return (T) parent;
+        return findByViewByClassFromParent((View) parent, viewClass);
+    }
+
+    /**
+     * 获得View的根View
+     */
+    public static View getRootView(View view) {
+        if (view == null) return null;
+        ViewParent parent = view.getParent();
+        if (parent == null) return null;
+        if (parent instanceof View) {
+            return getRootView((View) parent);
+        }
+        return view;
+    }
 }
